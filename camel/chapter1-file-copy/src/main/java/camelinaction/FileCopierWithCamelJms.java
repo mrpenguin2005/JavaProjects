@@ -16,30 +16,42 @@
  */
 package camelinaction;
 
+import javax.jms.ConnectionFactory;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
 public class FileCopierWithCamelJms {
 
-    public static void main(String args[]) throws Exception {
-        // create CamelContext
-        CamelContext context = new DefaultCamelContext();
+	public static void main(String args[]) throws Exception {
+		// create CamelContext
+		CamelContext context = new DefaultCamelContext();
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
+				"vm://localhost");
 
-        // add our route to the CamelContext
-        context.addRoutes(new RouteBuilder() {
-            public void configure() {
-                from("file:data/inbox?noop=true&doneFileName=${file:name}.done").to("file:data/outbox");
-            }
-        });
+		context.addComponent("jms",
+				JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 
-        // start the route and let it do its work
-        context.start();
-        //Thread.sleep(10000);
-        // 5 Min
-        Thread.sleep(18000000);
+		// add our route to the CamelContext
+		context.addRoutes(new RouteBuilder() {
+			public void configure() {
+//				from("file:data/inbox?noop=true&doneFileName=${file:name}.done")
+//						.to("file:data/outbox");
+				from("file:data/inbox?noop=true&doneFileName=${file:name}.done")
+						.to("jms:queue:incomingOrders");
+			}
+		});
 
-        // stop the CamelContext
-        context.stop();
-    }
+		// start the route and let it do its work
+		context.start();
+		// Thread.sleep(10000);
+		// 5 Min
+		Thread.sleep(18000000);
+
+		// stop the CamelContext
+		context.stop();
+	}
 }
