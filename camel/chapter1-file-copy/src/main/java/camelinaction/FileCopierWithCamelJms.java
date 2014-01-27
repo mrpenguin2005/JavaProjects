@@ -30,7 +30,7 @@ public class FileCopierWithCamelJms {
 		// create CamelContext
 		CamelContext context = new DefaultCamelContext();
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-				"vm://localhost");
+				"tcp://192.168.40.10:61616");
 
 		context.addComponent("jms",
 				JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
