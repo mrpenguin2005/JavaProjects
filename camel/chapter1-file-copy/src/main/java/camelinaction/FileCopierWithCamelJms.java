@@ -29,19 +29,16 @@ public class FileCopierWithCamelJms {
 	public static void main(String args[]) throws Exception {
 		// create CamelContext
 		CamelContext context = new DefaultCamelContext();
-		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-				"tcp://192.168.40.10:61616");
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.40.10:61616");
 
-		context.addComponent("jms",
-				JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+		context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 
 		// add our route to the CamelContext
 		context.addRoutes(new RouteBuilder() {
 			public void configure() {
-//				from("file:data/inbox?noop=true&doneFileName=${file:name}.done")
-//						.to("file:data/outbox");
-				from("file:data/inbox?noop=true&doneFileName=${file:name}.done")
-						.to("jms:queue:incomingOrders");
+				// from("file:data/inbox?noop=true&doneFileName=${file:name}.done")
+				// .to("file:data/outbox");
+				from("file:data/inbox?noop=true&doneFileName=${file:name}.done").to("jms:queue:incomingOrders");
 			}
 		});
 
