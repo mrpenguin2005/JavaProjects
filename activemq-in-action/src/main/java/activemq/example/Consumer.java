@@ -5,10 +5,10 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
-import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQBytesMessage;
 
 public class Consumer {
 
@@ -25,8 +25,13 @@ public class Consumer {
 		Destination destination = session.createQueue("incomingOrders");
 		MessageConsumer messageConsumer = session.createConsumer(destination);
 		Message message = messageConsumer.receive();
+		ActiveMQBytesMessage byteMessage = (ActiveMQBytesMessage)message;
+		int size = byteMessage.getSize();
+		byte[] buffer = new byte[size];
+		byteMessage.readBytes(buffer,size);
+		System.out.println("Size : "+size);
+		System.out.println(new String(buffer));
 		
-		((ObjectMessage)message).getObject();
 		
 		connection.stop();
 	}
