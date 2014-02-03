@@ -36,9 +36,10 @@ public class FileCopierWithCamelJms {
 		// add our route to the CamelContext
 		context.addRoutes(new RouteBuilder() {
 			public void configure() {
-				// from("file:data/inbox?noop=true&doneFileName=${file:name}.done")
-				// .to("file:data/outbox");
-				from("file:data/inbox?noop=true&doneFileName=${file:name}.done").to("jms:queue:incomingOrders");
+				// from("file:data/inbox?noop=true&doneFileName=${file:name}.done").to("file:data/outbox");
+				
+				//from("file:data/inbox?noop=true&doneFileName=${file:name}.done").to("jms:queue:incomingOrders");
+				from("file:data/inbox?noop=false&doneFileName=${file:name}.done").to("jms:queue:incomingOrders");
 			}
 		});
 
