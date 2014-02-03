@@ -50,8 +50,8 @@ public class Consumer {
 		int br;
 		System.out.println("Size : "+size);
 
-		//String fileName = "/var/tmp/data/file_";
-		String fileName = "c://tmp/file_";
+		String fileName = "/var/tmp/data/file_";
+		//String fileName = "c://tmp/file_";
 		
 		File file = new File(fileName+new Date().getTime());
 		file.createNewFile();
