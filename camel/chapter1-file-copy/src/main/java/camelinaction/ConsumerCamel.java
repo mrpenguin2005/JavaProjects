@@ -9,7 +9,7 @@ import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
 public class ConsumerCamel {
-	
+
 	public static void main(String args[]) throws Exception {
 		// create CamelContext
 		CamelContext context = new DefaultCamelContext();
@@ -20,13 +20,13 @@ public class ConsumerCamel {
 		// add our route to the CamelContext
 		context.addRoutes(new RouteBuilder() {
 			public void configure() {
-				from("jms:queue:incomingOrders").to("file:data/download");
+				from("jms:queue:solicitacoes").to("file:data/download");
 			}
 		});
 
 		// start the route and let it do its work
 		context.start();
-		//Thread.sleep(10000);
+		// Thread.sleep(10000);
 		Thread.sleep(180000);
 
 		// stop the CamelContext
