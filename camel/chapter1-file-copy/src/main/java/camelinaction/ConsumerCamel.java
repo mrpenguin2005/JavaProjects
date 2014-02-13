@@ -20,14 +20,14 @@ public class ConsumerCamel {
 		// add our route to the CamelContext
 		context.addRoutes(new RouteBuilder() {
 			public void configure() {
-				from("jms:queue:solicitacoes").to("file:data/download");
+				from("jms:queue:solicitacoes").to("file:/var/www/ooo/solicitacoes");
 			}
 		});
 
 		// start the route and let it do its work
 		context.start();
 		// Thread.sleep(10000);
-		Thread.sleep(180000);
+		Thread.sleep(3600000);
 
 		// stop the CamelContext
 		context.stop();
