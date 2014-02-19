@@ -60,6 +60,8 @@ public class ConsumerCamel {
 			}
 		});
 
+		System.err.println("Started.");
+		waitForever();
 		// stop the CamelContext
 		//context.stop();
 	}
