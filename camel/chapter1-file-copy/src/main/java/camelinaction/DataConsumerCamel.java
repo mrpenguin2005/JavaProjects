@@ -4,21 +4,23 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
 public class DataConsumerCamel {
-
+	static ThreadPoolExecutor pool = null;
+	
 	public static void main(String args[]) throws Exception {
-		// Read Configuration
-		//Properties prop = loadConfig("c:\\tmp\\Imagens\\solicitacoes.alunos.properties");
+		
 		String propFile = null;
 		if (args.length == 1) {
 			propFile = args[0];
@@ -37,19 +39,16 @@ public class DataConsumerCamel {
 
 		context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 
-		// add our route to the CamelContext
-//		context.addRoutes(new RouteBuilder() {
-//			public void configure() {
-//				from(brokerJmsQueue).to("direct:processoId?block=false");
-//			}
-//		});
-
-		// start the route and let it do its work
 		context.start();
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				try {
+					System.err.println("ShutdownHook invoked. !!!!");
+					System.err.println("Thread Pool Active Count : "+pool.getActiveCount());
+					System.err.println("Thread Pool Task   Count : "+pool.getTaskCount());
+					pool.shutdown();
+					pool.awaitTermination(120, TimeUnit.SECONDS);
 					context.stop();
 					waitSeconds(1);
 				} catch (Exception e) {
@@ -62,16 +61,17 @@ public class DataConsumerCamel {
 		System.err.println("Cache size: "+template.getCurrentCacheSize());
 		template.setMaximumCacheSize(1);
 		String msg = "";
-		
+		Integer delay = 10;
+		pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
+		System.err.println("Largest Pool Size :" + pool.getLargestPoolSize());
 		do {
 			msg = (String)template.receiveBody(brokerJmsQueue);
+			executeWhenIdle(pool, new GenericTestRunnable(msg,delay++));
 			System.err.println( "Message Received : "+msg);
 		} while(!msg.equalsIgnoreCase("fim"));
 		
 		System.err.println("Started.");
 		waitForever();
-		// stop the CamelContext
-		//context.stop();
 	}
 	
 	public static void waitForever() {
@@ -82,6 +82,17 @@ public class DataConsumerCamel {
 				break;
 			}
 		}
+	}
+	
+	public static void executeWhenIdle(ThreadPoolExecutor p , Runnable task) {
+		while (p.getActiveCount() >= 3) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				break;
+			}
+		}
+		p.execute(task);
 	}
 	
 	public static void waitSeconds(int seconds) {

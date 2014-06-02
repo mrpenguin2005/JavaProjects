@@ -43,11 +43,9 @@ public class DataWithCamelJms {
 
 		// start the route and let it do its work
 		context.start();
-		// Thread.sleep(10000);
-		// 5 Min
 		System.err.println("Context Started");
 		ProducerTemplate template = context.createProducerTemplate();
-		for (int i = 0 ; i < 5 ; i++) {
+		for (int i = 0 ; i < 15 ; i++) {
 			template.sendBody("direct:processoId","teste_"+i);
 		}
 		Thread.sleep(18000000);
