@@ -46,7 +46,8 @@ public class DataWithCamelJms {
 		System.err.println("Context Started");
 		ProducerTemplate template = context.createProducerTemplate();
 		for (int i = 0 ; i < 15 ; i++) {
-			template.sendBody("direct:processoId","teste_"+i);
+			//template.sendBody("direct:processoId","teste_"+i);
+			template.sendBody("direct:processoId",i);
 		}
 		Thread.sleep(18000000);
 

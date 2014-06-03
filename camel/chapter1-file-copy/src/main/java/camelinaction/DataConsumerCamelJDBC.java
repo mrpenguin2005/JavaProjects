@@ -16,7 +16,7 @@ import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
-public class DataConsumerCamel {
+public class DataConsumerCamelJDBC {
 	static ThreadPoolExecutor pool = null;
 	
 	public static void main(String args[]) throws Exception {
@@ -28,17 +28,23 @@ public class DataConsumerCamel {
 		Properties prop = loadConfig(propFile);
 		final String brokerUrl = prop.getProperty("broker.url");
 		final String brokerJmsQueue = prop.getProperty("broker.from.jms");
+		final String jdbcUrl = prop.getProperty("jdbc.url");
+		final String jdbcUser = prop.getProperty("jdbc.user");
+		final String jdbcPassowrd = prop.getProperty("jdbc.password");
 
 		System.out.println("Config File : "+propFile);
 		System.out.println("Broker URL  : "+brokerUrl);
 		System.out.println("Broker JMS  : "+brokerJmsQueue);
+		
+//		JdbcTestRunnable ooo = new JdbcTestRunnable(jdbcUrl,jdbcUser,jdbcPassowrd,255385);
+//		ooo.run();
+//		System.exit(0);
+		
 		// create CamelContext
 		final CamelContext context = new DefaultCamelContext();
-		//ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.40.10:61616");
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerUrl);
 
 		context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-		//context.addComponent("jms", JmsComponent.jmsComponentClientAcknowledge(connectionFactory));
 
 		context.start();
 		
@@ -61,26 +67,15 @@ public class DataConsumerCamel {
 		ConsumerTemplate template = context.createConsumerTemplate();
 		System.err.println("Cache size: "+template.getCurrentCacheSize());
 		template.setMaximumCacheSize(1);
-		String msg = "";
-		Integer number;
-		Integer delay = 10;
+		Integer codProcesso;
 		pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
 		System.err.println("Largest Pool Size :" + pool.getLargestPoolSize());
 		
-//		Exchange e = template.receive(brokerJmsQueue);
-//		JmsMessage m = (JmsMessage)e.getIn();
-//		System.err.println("----> "+m.getBody());
-//		m.getJmsMessage().acknowledge();
-		
 		do {
-			//msg = (String)template.receiveBody(brokerJmsQueue);
-			number = (Integer)template.receiveBody(brokerJmsQueue);
-			executeWhenIdle(pool, new GenericTestRunnable(msg,delay++));
-			System.err.println( "Message Received : "+number);
-		} while(!msg.equalsIgnoreCase("fim"));
-		
-		System.err.println("Started.");
-		waitForever();
+			codProcesso = (Integer)template.receiveBody(brokerJmsQueue);
+			executeWhenIdle(pool, new JdbcTestRunnable(jdbcUrl,jdbcUser,jdbcPassowrd,codProcesso));
+			System.err.println( "Message Received : "+codProcesso);
+		} while(true);
 	}
 	
 	public static void waitForever() {
