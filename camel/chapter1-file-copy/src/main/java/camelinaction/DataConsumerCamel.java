@@ -38,6 +38,7 @@ public class DataConsumerCamel {
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerUrl);
 
 		context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+		//context.addComponent("jms", JmsComponent.jmsComponentClientAcknowledge(connectionFactory));
 
 		context.start();
 		
@@ -64,6 +65,12 @@ public class DataConsumerCamel {
 		Integer delay = 10;
 		pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
 		System.err.println("Largest Pool Size :" + pool.getLargestPoolSize());
+		
+//		Exchange e = template.receive(brokerJmsQueue);
+//		JmsMessage m = (JmsMessage)e.getIn();
+//		System.err.println("----> "+m.getBody());
+//		m.getJmsMessage().acknowledge();
+		
 		do {
 			msg = (String)template.receiveBody(brokerJmsQueue);
 			executeWhenIdle(pool, new GenericTestRunnable(msg,delay++));
