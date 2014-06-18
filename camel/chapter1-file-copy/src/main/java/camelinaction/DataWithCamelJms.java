@@ -37,7 +37,7 @@ public class DataWithCamelJms {
 		// add our route to the CamelContext
 		context.addRoutes(new RouteBuilder() {
 			public void configure() {
-				from("direct:processoId").to("jms:queue:zvezda");
+				from("direct:processoId").to("jms:queue:processoControle-tes");
 			}
 		});
 
@@ -45,11 +45,16 @@ public class DataWithCamelJms {
 		context.start();
 		System.err.println("Context Started");
 		ProducerTemplate template = context.createProducerTemplate();
-		for (int i = 0 ; i < 15 ; i++) {
-			//template.sendBody("direct:processoId","teste_"+i);
-			template.sendBody("direct:processoId",i);
+		String[] processos = { 
+				"2811:271451",
+				"2652:271452",
+				"3550:271453",
+				"1626:271450"
+				};
+		for (int i = 0 ; i < processos.length ; i++) {
+			template.sendBody("direct:processoId",processos[i]);
 		}
-		Thread.sleep(18000000);
+		//Thread.sleep(18000000);
 
 		// stop the CamelContext
 		context.stop();
