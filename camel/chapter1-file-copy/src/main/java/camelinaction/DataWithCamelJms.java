@@ -54,6 +54,9 @@ public class DataWithCamelJms {
 		for (int i = 0 ; i < processos.length ; i++) {
 			template.sendBody("direct:processoId",processos[i]);
 		}
+//		for (int i = 0 ; i < processos.length ; i++) {
+//			template.sendBody("direct:processoId",processos[i]);
+//		}
 		//Thread.sleep(18000000);
 
 		// stop the CamelContext
