@@ -49,8 +49,13 @@ public class DataWithCamelJms {
 				"2811:271451",
 				"2652:271452",
 				"3550:271453",
-				"1626:271450"
+				"1626:271450",
+				"3491:271416",
+				"4380:271415",
+				"1034:271414",
+				"4492:271413"
 				};
+		waitSeconds(10);
 		for (int i = 0 ; i < processos.length ; i++) {
 			template.sendBody("direct:processoId",processos[i]);
 		}
@@ -61,5 +66,13 @@ public class DataWithCamelJms {
 
 		// stop the CamelContext
 		context.stop();
+	}
+	
+	public static void waitSeconds(int seconds) {
+		try {
+			Thread.sleep(seconds*1000);
+		} catch (InterruptedException e) {
+			return;
+		}
 	}
 }
