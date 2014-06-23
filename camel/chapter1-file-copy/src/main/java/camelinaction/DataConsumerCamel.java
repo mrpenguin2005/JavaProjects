@@ -1,6 +1,7 @@
 package camelinaction;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
@@ -15,6 +16,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.impl.DefaultCamelContext;
+
 
 public class DataConsumerCamel {
 	static ThreadPoolExecutor pool = null;
@@ -62,9 +64,8 @@ public class DataConsumerCamel {
 		System.err.println("Cache size: "+template.getCurrentCacheSize());
 		template.setMaximumCacheSize(1);
 		String msg = "";
-		Integer number;
 		Integer delay = 10;
-		pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(3);
+		pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(1);
 		System.err.println("Largest Pool Size :" + pool.getLargestPoolSize());
 		
 //		Exchange e = template.receive(brokerJmsQueue);
@@ -73,10 +74,9 @@ public class DataConsumerCamel {
 //		m.getJmsMessage().acknowledge();
 		
 		do {
-			//msg = (String)template.receiveBody(brokerJmsQueue);
-			number = (Integer)template.receiveBody(brokerJmsQueue);
+			msg = (String)template.receiveBody(brokerJmsQueue);
 			executeWhenIdle(pool, new GenericTestRunnable(msg,delay++));
-			System.err.println( "Message Received : "+number);
+			System.err.println( "Message Received : "+msg);
 		} while(!msg.equalsIgnoreCase("fim"));
 		
 		System.err.println("Started.");
