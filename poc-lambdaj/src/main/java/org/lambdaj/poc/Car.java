@@ -52,7 +52,7 @@ public class Car {
 	}
 	
 	public static Comparator<Car> getComparator(String... properties) {
-		return new CompareWhatIWant(properties);
+		return new CompareProperties(properties);
 	}
 }
 
@@ -68,10 +68,10 @@ class CompareBrandYear implements Comparator<Car> {
 	}
 }
 
-class CompareWhatIWant implements Comparator<Car> {
+class CompareProperties implements Comparator<Car> {
 	private List<String> properties;
 
-	public CompareWhatIWant(String... properties) {
+	public CompareProperties(String... properties) {
 		this.properties = Arrays.asList(properties);
 	}
 

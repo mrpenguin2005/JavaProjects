@@ -19,7 +19,7 @@ public class Teste {
 //		result = selectDistinct( listCar,"brand");
 //		show(result);
 		
-		result = selectDistinct( listCar,Car.getComparator("brand"));
+		result = selectDistinct( listCar,Car.getComparator("brand","year"));
 		show(result);
 	}
 	
