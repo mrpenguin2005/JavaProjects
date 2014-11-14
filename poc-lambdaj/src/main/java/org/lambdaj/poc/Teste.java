@@ -28,18 +28,18 @@ public class Teste {
 		
 		car = new ArrayList<Car>();
 		
-		car.add(new Car(1,2012,"Gol"));
-		car.add(new Car(1,2013,"Gol"));
-		car.add(new Car(1,2014,"Gol 1.0"));
-		car.add(new Car(1,2014,"Gol 1.6"));
-		car.add(new Car(1,2014,"Gol 1.8"));
+		car.add(new Car(BrandType.VW,2012,"Gol"));
+		car.add(new Car(BrandType.VW,2013,"Gol"));
+		car.add(new Car(BrandType.VW,2014,"Gol 1.0"));
+		car.add(new Car(BrandType.VW,2014,"Gol 1.6"));
+		car.add(new Car(BrandType.VW,2014,"Gol 1.8"));
 		//
-		car.add(new Car(2,2012,"Palio"));
-		car.add(new Car(2,2013,"Punto"));
-		car.add(new Car(2,2014,"Punto"));
+		car.add(new Car(BrandType.FT,2012,"Palio"));
+		car.add(new Car(BrandType.FT,2013,"Punto"));
+		car.add(new Car(BrandType.FT,2014,"Punto"));
 		
-		car.add(new Car(3,2014,"Audi A7"));
-		car.add(new Car(3,2014,"Audi A8"));
+		car.add(new Car(BrandType.AD,2014,"Audi A7"));
+		car.add(new Car(BrandType.AD,2014,"Audi A8"));
 		
 		return car;
 	}

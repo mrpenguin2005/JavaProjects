@@ -8,21 +8,21 @@ import org.apache.commons.beanutils.PropertyUtils;
 
 public class Car {
 
-	private Integer brand;
+	private BrandType brand;
 	private Integer year;
 	private String model;
 
-	public Car(Integer brand, Integer year, String model) {
+	public Car(BrandType brand, Integer year, String model) {
 		this.brand = brand;
 		this.year = year;
 		this.model = model;
 	}
 
-	public Integer getBrand() {
+	public BrandType getBrand() {
 		return brand;
 	}
 
-	public void setBrand(Integer brand) {
+	public void setBrand(BrandType brand) {
 		this.brand = brand;
 	}
 
