@@ -58,7 +58,6 @@ public class Car {
 
 class CompareBrandYear implements Comparator<Car> {
 
-	@Override
 	public int compare(Car o1, Car o2) {
 		if (o1.getBrand().equals(o2.getBrand())
 				&& o1.getYear().equals(o2.getYear())) {
@@ -75,7 +74,6 @@ class CompareProperties implements Comparator<Car> {
 		this.properties = Arrays.asList(properties);
 	}
 
-	@Override
 	public int compare(Car o1, Car o2) {
 		Boolean isEqual = true;
 		try {
