@@ -7,20 +7,22 @@ import javax.ws.rs.Produces;
 @Path("/data")
 public class Data {
 
-	private String info;
+	private Bean info;
 
 	public Data() {
-		this.info = "text data";
+		this.info = new Bean();
+		this.info.setName("John");
+		this.info.setAge(40);
 	}
 
 	@GET
 	@Path("/info")
 	@Produces("application/json;charset=utf-8")
-	public String getInfo() {
+	public Bean getInfo() {
 		return info;
 	}
 
-	public void setInfo(String info) {
+	public void setInfo(Bean info) {
 		this.info = info;
 	}
 
