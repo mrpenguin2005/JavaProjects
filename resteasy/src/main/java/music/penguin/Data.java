@@ -47,15 +47,17 @@ public class Data {
 		if (teste != null) {
 			System.err.println( "Teste.name : "+teste.getName());
 		}
-		
-//		Grape grape = em.find(Grape.class,2L);
-//		grape.getWines().size();
-		Grape grape = grapeBS.retrieveGrapes();
-		System.err.println("Grape : "+grape.getName());
-		
 		Profile profile = em.find(Profile.class, 1L);
 		
 		return profile;
+	}
+	
+	@GET
+	@Path("/grape")
+	@Produces("application/json;charset=utf-8")
+	public Grape getGrape() {
+		Grape grape = grapeBS.retrieveGrapes();
+		return grape;
 	}
 
 }

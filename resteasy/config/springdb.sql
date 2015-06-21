@@ -22,7 +22,6 @@
 --
 -- Table structure for table `tb_grape`
 --
-
 DROP TABLE IF EXISTS `tb_teste`;
 CREATE TABLE `tb_teste` (
 	  `id_teste` int(11) NOT NULL auto_increment,
