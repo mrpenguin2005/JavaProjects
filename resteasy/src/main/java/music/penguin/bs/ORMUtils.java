@@ -1,13 +1,17 @@
 package music.penguin.bs;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnitUtil;
 
-public class ORMUtils {
-	@PersistenceContext static EntityManager em;
+public class ORMUtils implements Serializable {
+
+	private static final long serialVersionUID = -3414490048495414958L;
+	
+	@PersistenceContext EntityManager em;
 
 	@SuppressWarnings("unchecked")
 	public <T> T initializeAndUnproxy(T entity) {

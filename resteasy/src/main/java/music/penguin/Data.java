@@ -56,7 +56,7 @@ public class Data {
 	@Path("/grape")
 	@Produces("application/json;charset=utf-8")
 	public Grape getGrape() {
-		Grape grape = grapeBS.retrieveGrapes();
+		Grape grape = grapeBS.retrieveGrape1();
 		return grape;
 	}
 
