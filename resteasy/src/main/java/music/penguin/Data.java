@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import music.penguin.bs.GrapeBS;
 import music.penguin.bs.ORMUtils;
 import music.penguin.domain.Grape;
 import music.penguin.domain.Profile;
@@ -16,6 +17,7 @@ import music.penguin.domain.Teste;
 public class Data {
 	@PersistenceContext EntityManager em;
 	@Inject ORMUtils ormUtils; 
+	@Inject GrapeBS grapeBS;
 
 	private Bean info;
 
@@ -45,9 +47,11 @@ public class Data {
 		if (teste != null) {
 			System.err.println( "Teste.name : "+teste.getName());
 		}
-		Grape grape = em.find(Grape.class,2L);
-		grape.getWines().size();
-		//ormUtils.initializeAndUnproxy(grape.getWines(),em);
+		
+//		Grape grape = em.find(Grape.class,2L);
+//		grape.getWines().size();
+		Grape grape = grapeBS.retrieveGrapes();
+		System.err.println("Grape : "+grape.getName());
 		
 		Profile profile = em.find(Profile.class, 1L);
 		
