@@ -14,6 +14,7 @@ import music.penguin.domain.Teste;
 
 @Path("/data")
 public class Data {
+	@PersistenceContext EntityManager em;
 	@Inject ORMUtils ormUtils; 
 
 	private Bean info;
@@ -36,7 +37,6 @@ public class Data {
 		this.info = info;
 	}
 	
-	@PersistenceContext EntityManager em;
 	@GET
 	@Path("/profile")
 	@Produces("application/json;charset=utf-8")
