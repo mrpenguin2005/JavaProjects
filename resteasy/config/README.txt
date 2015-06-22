@@ -1,2 +1,3 @@
-mkdir modules/com/mysql/main 
+mkdir modules/com/mysql/main
+URL: jdbc:mysql://localhost/springdb 
 
