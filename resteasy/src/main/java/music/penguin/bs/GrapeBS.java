@@ -51,13 +51,6 @@ public class GrapeBS implements Serializable {
 	//@TransactionAttribute(TransactionAttributeType.NEVER)
 	public Grape retrieveGrape1() {
 		Grape grape = null;
-		try {
-			System.err.println( "Transaction Active : " + utx.getStatus());
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//System.err.println("Transaction active? {}" + (tsr.getTransactionStatus() == Status.STATUS_ACTIVE));
 		grape = em.find(Grape.class,2L);
 		for (Wine w : grape.getWines()) {
 			//w.getSynonyms().size();

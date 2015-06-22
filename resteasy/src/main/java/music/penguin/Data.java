@@ -47,7 +47,7 @@ public class Data {
 		if (teste != null) {
 			System.err.println( "Teste.name : "+teste.getName());
 		}
-		Profile profile = em.find(Profile.class, 1L);
+		Profile profile = em.find(Profile.class, 2L);
 		
 		return profile;
 	}

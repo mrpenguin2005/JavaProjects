@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `tb_profile`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tb_profile` (
   `id_profile` bigint NOT NULL auto_increment,
-  `desc` varchar(45) default NULL,
+  `name` varchar(45) default NULL,
   PRIMARY KEY  (`id_profile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

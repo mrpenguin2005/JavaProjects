@@ -18,7 +18,7 @@ public class Profile implements Serializable {
 	private static final long serialVersionUID = -7889127565252398505L;
 	
 	private Long id;
-	private String desc;
+	private String name;
 	
 	public Profile() {}
 
@@ -32,13 +32,13 @@ public class Profile implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="desc")
-	public String getDesc() {
-		return desc;
+	@Column(name="name")
+	public String getName() {
+		return name;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
