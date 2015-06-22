@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 @Entity
 @Table(name="tb_grape")
 public class Grape implements Serializable {
@@ -23,6 +25,7 @@ public class Grape implements Serializable {
 	private Long id;
 	private String name;
 	private String color;
+	@JsonManagedReference
 	private Collection<Wine> wines;
 	
 	public Grape() {}

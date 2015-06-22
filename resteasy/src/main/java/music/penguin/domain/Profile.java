@@ -4,15 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 @Entity
 @Table(name="tb_profile")
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL,
-	typing = JsonSerialize.Typing.STATIC)
 public class Profile implements Serializable {
 	
 	private static final long serialVersionUID = -7889127565252398505L;
@@ -23,6 +21,7 @@ public class Profile implements Serializable {
 	public Profile() {}
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_profile")
 	public Long getId() {
 		return id;

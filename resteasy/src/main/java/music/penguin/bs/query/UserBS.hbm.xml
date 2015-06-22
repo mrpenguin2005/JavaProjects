@@ -2,12 +2,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-
-	<query name="UserBS.retrieveUserById"><![CDATA[
-	SELECT user
-	FROM User user
-	WHERE user.id = :userId 
-	]]></query>
 	
 	<query name="UserBS.retrieveUserByLogin"><![CDATA[
 	SELECT user

@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity
 @Table(name="tb_wine")
 public class Wine implements Serializable {
@@ -27,8 +29,10 @@ public class Wine implements Serializable {
 	private String name;
 	private Integer vintage;
 	private String country;
+	@JsonBackReference
 	private Collection<Grape> grapes;
 	private Set<Synonym> synonyms;
+	@JsonBackReference
 	private User user;
 	
 	public Wine() {}

@@ -10,6 +10,8 @@ import javax.persistence.PersistenceContext;
 
 import music.penguin.dao.GrapeDAO;
 import music.penguin.domain.Grape;
+import music.penguin.domain.Profile;
+import music.penguin.domain.User;
 import music.penguin.domain.Wine;
 
 @Stateful
@@ -26,15 +28,17 @@ public class GrapeBS implements Serializable {
 		return grapeDAO.retrieveGrapeList();
 	}
 
-	//@TransactionAttribute(TransactionAttributeType.NEVER)
 	public Grape retrieveGrape() {
 		Grape grape = null;
 		grape = em.find(Grape.class,2L);
+
 		for (Wine w : grape.getWines()) {
 			//w.getSynonyms().size();
 			//w.getGrapes().size();
 			ormUtils.initializeAndUnproxy(w.getSynonyms());
 			ormUtils.initializeAndUnproxy(w.getGrapes());
+			em.find(User.class,w.getUser().getId());
+			em.find(Profile.class,w.getUser().getProfile().getId());
 		}
 		return grape;
 	}

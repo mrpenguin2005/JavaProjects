@@ -1,5 +1,6 @@
 package music.penguin.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +11,9 @@ import music.penguin.domain.Wine;
 import music.penguin.dto.WineDTO;
 
 
-public class WineDAO {
+public class WineDAO implements Serializable {
+	
+	private static final long serialVersionUID = -3248899803029946147L;
 	
 	@PersistenceContext EntityManager em;
 	

@@ -1,7 +1,5 @@
 package music.penguin;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,15 +9,18 @@ import javax.ws.rs.Produces;
 
 import music.penguin.bs.GrapeBS;
 import music.penguin.bs.ORMUtils;
+import music.penguin.bs.UserBS;
 import music.penguin.domain.Grape;
 import music.penguin.domain.Profile;
 import music.penguin.domain.Teste;
+import music.penguin.domain.User;
 
 @Path("/data")
 public class Data {
 	@PersistenceContext EntityManager em;
 	@Inject ORMUtils ormUtils; 
 	@Inject GrapeBS grapeBS;
+	@Inject UserBS userBS;
 
 	private Bean info;
 
@@ -50,10 +51,6 @@ public class Data {
 			System.err.println( "Teste.name : "+teste.getName());
 		}
 		Profile profile = em.find(Profile.class, 2L);
-		List<Grape> grapes = grapeBS.retrieveAllGrapes();
-		for (Grape grape : grapes) {
-			System.err.println( "Grape : "+grape.getName()+ " / "+grape.getColor());
-		}
 		
 		return profile;
 	}
@@ -64,6 +61,14 @@ public class Data {
 	public Grape getGrape() {
 		Grape grape = grapeBS.retrieveGrape();
 		return grape;
+	}
+	
+	@GET
+	@Path("/user")
+	@Produces("application/json;charset=utf-8")
+	public User getUser() {
+		User user = userBS.retrieveUserById(2L);
+		return user;
 	}
 
 }
