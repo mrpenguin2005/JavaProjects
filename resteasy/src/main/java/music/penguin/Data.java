@@ -1,5 +1,7 @@
 package music.penguin;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -48,6 +50,10 @@ public class Data {
 			System.err.println( "Teste.name : "+teste.getName());
 		}
 		Profile profile = em.find(Profile.class, 2L);
+		List<Grape> grapes = grapeBS.retrieveAllGrapes();
+		for (Grape grape : grapes) {
+			System.err.println( "Grape : "+grape.getName()+ " / "+grape.getColor());
+		}
 		
 		return profile;
 	}
@@ -56,7 +62,7 @@ public class Data {
 	@Path("/grape")
 	@Produces("application/json;charset=utf-8")
 	public Grape getGrape() {
-		Grape grape = grapeBS.retrieveGrape1();
+		Grape grape = grapeBS.retrieveGrape();
 		return grape;
 	}
 
