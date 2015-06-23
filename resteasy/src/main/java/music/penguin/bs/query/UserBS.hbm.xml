@@ -9,4 +9,11 @@
 	WHERE user.login = :userLogin 
 	]]></query>
 	
+	<query name="UserBS.retrieveUserById"><![CDATA[
+	SELECT user
+	FROM User user
+	JOIN FETCH user.profile p
+	WHERE user.id = :id 
+	]]></query>
+	
 </hibernate-mapping>

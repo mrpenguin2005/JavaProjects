@@ -1,6 +1,7 @@
 package music.penguin.bs;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -10,9 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import music.penguin.dao.GrapeDAO;
 import music.penguin.domain.Grape;
-import music.penguin.domain.Profile;
-import music.penguin.domain.User;
-import music.penguin.domain.Wine;
+import music.penguin.dto.GrapeDTO;
 
 @Stateful
 public class GrapeBS implements Serializable {
@@ -23,23 +22,30 @@ public class GrapeBS implements Serializable {
 	
 	@Inject ORMUtils ormUtils;
 	@Inject GrapeDAO grapeDAO;
+	@Inject UserBS userBS;
 
 	public List<Grape> retrieveAllGrapes() {
 		return grapeDAO.retrieveGrapeList();
 	}
+	
+	public List<GrapeDTO> retrieveAllGrapesDTO() {
+		List<Grape> grapes = grapeDAO.retrieveGrapeList();
+		List<GrapeDTO> grapesDTO = new ArrayList<GrapeDTO>();
+		for (Grape grape : grapes) {
+			GrapeDTO grapeDTO = new GrapeDTO(grape);
+			grapeDTO.setWines(GrapeDTO.createDTOList(grape.getWines()));
+			grapesDTO.add(grapeDTO);
+		}
+		return grapesDTO;
+	}
 
-	public Grape retrieveGrape() {
+	public GrapeDTO retrieveGrape() {
 		Grape grape = null;
 		grape = em.find(Grape.class,2L);
 
-		for (Wine w : grape.getWines()) {
-			//w.getSynonyms().size();
-			//w.getGrapes().size();
-			ormUtils.initializeAndUnproxy(w.getSynonyms());
-			ormUtils.initializeAndUnproxy(w.getGrapes());
-			em.find(User.class,w.getUser().getId());
-			em.find(Profile.class,w.getUser().getProfile().getId());
-		}
-		return grape;
+		GrapeDTO dto = new GrapeDTO(grape);
+		dto.setWines(GrapeDTO.createDTOList(grape.getWines()));
+		return dto;
 	}
+	
 }

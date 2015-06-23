@@ -7,53 +7,48 @@ import javax.ejb.Stateful;
 import javax.inject.Inject;
 
 import music.penguin.dao.WineDAO;
-import music.penguin.domain.Grape;
-import music.penguin.domain.Synonym;
 import music.penguin.domain.Wine;
 import music.penguin.dto.WineDTO;
 
 @Stateful
 public class WineBS {
-	@Inject WineDAO wineDao;
+	@Inject WineDAO wineDAO;
 	@Inject ORMUtils ormUtils;
 	
 	public void addWine(Wine wine) {
-		wineDao.addWine(wine);
+		wineDAO.addWine(wine);
 	}
 	
 	public void updateWine(Wine wine) {
-		wineDao.updateWine(wine);
+		wineDAO.updateWine(wine);
 	}
 
 	public WineDTO getWineDTOById(long id) {
-		WineDTO wineDTO = new WineDTO();
+		WineDTO wineDTO;
 		
-		Wine wine = wineDao.getWineById(id);
-		
-		List<Grape> grapes = new ArrayList<Grape>();
-		for (Grape grape : wine.getGrapes()) {
-			grapes.add(ormUtils.initializeAndUnproxy(grape));
-		}
-		wineDTO.setGrapes(grapes);
-		
-		List<Synonym> synonyms = new ArrayList<Synonym>();
-		for (Synonym synonym : wine.getSynonyms()) {
-			synonyms.add(ormUtils.initializeAndUnproxy(synonym));
-		}
-		wineDTO.setSynonyms(synonyms);
+		Wine wine = wineDAO.getWineById(id);
+		wine.getSynonyms().size();
+		wineDTO = new WineDTO(wine);
+		wineDTO.setGrapes(WineDTO.createDTOList(wine.getGrapes()));
 		
 		return wineDTO;
 	}
 	
 	public Wine getWineById(long id) {
-		return wineDao.getWineById(id);
+		return wineDAO.getWineById(id);
 	}
 	
 	public List<Wine> retrieveWineList() {
-		return wineDao.retrieveWineList();
+		return wineDAO.retrieveWineList(null);
 	}
 	
 	public List<WineDTO> retrieveWineDTOList(Long userId) {
-		return wineDao.retrieveWineDTOList(userId);
+		List<WineDTO> winesDTO = new ArrayList<WineDTO>();		
+		List<Wine> wines = wineDAO.retrieveWineList(userId);
+		for (Wine wine : wines) {
+			winesDTO.add(new WineDTO(wine));
+		}
+		
+		return winesDTO;
 	}
 }

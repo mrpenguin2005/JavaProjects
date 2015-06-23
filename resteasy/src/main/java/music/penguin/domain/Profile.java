@@ -19,7 +19,12 @@ public class Profile implements Serializable {
 	private String name;
 	
 	public Profile() {}
-
+	
+	public Profile(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_profile")

@@ -1,97 +1,91 @@
 package music.penguin.dto;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
-import javax.inject.Inject;
-
-import music.penguin.bs.ORMUtils;
 import music.penguin.domain.Grape;
 import music.penguin.domain.Synonym;
 import music.penguin.domain.Wine;
 
-public class WineDTO extends GenericDTO<Wine> {
+public class WineDTO {
 	private Long id;
 	private String name;
 	private Integer vintage;
 	private String country;
-	@Ignore
-	private List<Grape> grapes;
-	@Ignore
-	private List<Synonym> synonyms;
-	@Ignore
+	private Collection<GrapeDTO> grapes;
+	private Set<Synonym> synonyms;
 	private UserDTO user;
-	
-	@Inject ORMUtils ormUtils;
 	
 	public WineDTO() {}
 	
 	public WineDTO(Wine wine) {
-		createDTO(wine);
-		
-		this.grapes = new ArrayList<Grape>();
-		for (Grape grape : wine.getGrapes()) {
-			grapes.add(ormUtils.initializeAndUnproxy(grape));
-		}
-		setGrapes(grapes);
-		
-		this.synonyms= new ArrayList<Synonym>();
-		for (Synonym synonym : wine.getSynonyms()) {
-			synonyms.add(ormUtils.initializeAndUnproxy(synonym));
-		}
-		setSynonyms(synonyms);
-		
+		this.id = wine.getId();
+		this.name = wine.getName();
+		this.vintage = wine.getVintage();
+		this.country = wine.getCountry();
+		this.grapes = null;
+		this.synonyms = wine.getSynonyms();
 		this.user = new UserDTO(wine.getUser());
 	}
 	
+	public static Collection<GrapeDTO> createDTOList(Collection<Grape> grapes) {
+		Collection<GrapeDTO> dtoList = new ArrayList<GrapeDTO>();
+		for (Grape grape : grapes) {
+			GrapeDTO g = new GrapeDTO(grape);
+			dtoList.add(g);
+		}
+		return dtoList;
+	}
+
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Integer getVintage() {
 		return vintage;
 	}
-
+	
 	public void setVintage(Integer vintage) {
 		this.vintage = vintage;
 	}
-
+	
 	public String getCountry() {
 		return country;
 	}
-
+	
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	public List<Grape> getGrapes() {
+	
+	public Collection<GrapeDTO> getGrapes() {
 		return grapes;
 	}
-
-	public void setGrapes(List<Grape> grapes) {
+	
+	public void setGrapes(Collection<GrapeDTO> grapes) {
 		this.grapes = grapes;
 	}
-
-	public List<Synonym> getSynonyms() {
+	
+	public Set<Synonym> getSynonyms() {
 		return synonyms;
 	}
-
-	public void setSynonyms(List<Synonym> synonyms) {
+	
+	public void setSynonyms(Set<Synonym> synonyms) {
 		this.synonyms = synonyms;
 	}
-
+	
 	public UserDTO getUser() {
 		return user;
 	}

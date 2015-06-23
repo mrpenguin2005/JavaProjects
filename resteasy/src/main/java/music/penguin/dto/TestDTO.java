@@ -5,7 +5,7 @@ import music.penguin.domain.Wine;
 public class TestDTO {
 
 	public static void main(String[] args) {
-		WineDTO wineDTO;
+		ExampleWineDTO wineDTO;
 
 		Wine wine = new Wine();
 		wine.setCountry("country");
@@ -13,7 +13,7 @@ public class TestDTO {
 		wine.setName("teste");
 		wine.setVintage(2222);
 
-		wineDTO = new WineDTO();
+		wineDTO = new ExampleWineDTO();
 		wineDTO.createDTO(wine);
 
 		System.out.println("--------------------");

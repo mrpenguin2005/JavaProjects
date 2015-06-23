@@ -1,8 +1,5 @@
 package music.penguin.dto;
 
-import javax.inject.Inject;
-
-import music.penguin.bs.ORMUtils;
 import music.penguin.domain.User;
 
 public class UserDTO {
@@ -12,8 +9,6 @@ public class UserDTO {
 	private String password;
 	private ProfileDTO profile;
 	
-	@Inject ORMUtils ormUtils;
-	
 	public UserDTO() {}
 	
 	public UserDTO(User user) {
@@ -21,7 +16,7 @@ public class UserDTO {
 		this.login = user.getLogin();
 		this.name = user.getName();
 		this.password = user.getPassword();
-		this.profile = new ProfileDTO(ormUtils.initializeAndUnproxy(user.getProfile()));
+		this.profile = new ProfileDTO(user.getProfile());
 	}
 
 	public Long getId() {

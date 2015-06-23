@@ -4,14 +4,10 @@
 <hibernate-mapping>
 
 	<query name="WineBS.retrieveWineList"><![CDATA[
-	SELECT wineList
-	FROM Wine wineList 
+	SELECT wine
+	FROM Wine wine
+	WHERE (:userId is null or wine.user.id = :userId)
 	]]></query>
 	
-	<query name="WineBS.retrieveWineDTOList"><![CDATA[
-	SELECT new music.penguin.dto.WineDTO(wineList)
-	FROM Wine wineList 
-	WHERE wineList.user.id = :userId
-	]]></query>
 
 </hibernate-mapping>

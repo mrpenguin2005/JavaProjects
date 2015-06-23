@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import music.penguin.domain.Wine;
-import music.penguin.dto.WineDTO;
 
 
 public class WineDAO implements Serializable {
@@ -32,17 +31,10 @@ public class WineDAO implements Serializable {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Wine> retrieveWineList() {
+	public List<Wine> retrieveWineList(Long userId) {
 		Query query = em.createNamedQuery("WineBS.retrieveWineList");
-		return query.getResultList();
-	}
-	
-	@SuppressWarnings("unchecked") 
-	public List<WineDTO> retrieveWineDTOList(Long userId) {
-		Query query = em.createNamedQuery("WineBS.retrieveWineDTOList");
 		query.setParameter("userId", userId);
 		return query.getResultList();
 	}
-
 
 }

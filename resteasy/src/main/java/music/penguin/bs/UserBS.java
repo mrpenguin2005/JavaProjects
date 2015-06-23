@@ -12,8 +12,7 @@ public class UserBS {
 	@Inject UserDAO userDAO;
 
 	public User retrieveUserById(Long userId) {
-		User user = userDAO.retrieveUserById(userId);
-		return user;
+		return userDAO.retrieveUserById(userId);
 	}
 	
 	public User retrieveUserByLogin(String userLogin) {

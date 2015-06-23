@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnitUtil;
 import javax.persistence.Query;
 
 import music.penguin.domain.Profile;
@@ -22,14 +21,9 @@ public class UserDAO implements Serializable {
 	}
 
 	public User retrieveUserById(Long userId) {
-		PersistenceUnitUtil unitUtil = em.getEntityManagerFactory().getPersistenceUnitUtil();
-		User user = em.find(User.class,userId); 
-		Profile profile = em.find(Profile.class,user.getProfile().getId());
-		profile.getName();
-		profile.getId();
-		user.setProfile(profile);
-		System.err.println("--> "+unitUtil.isLoaded(profile));
-		return user;
+		Query query = em.createNamedQuery("UserBS.retrieveUserById");
+		query.setParameter("id", userId);
+		return (User)(query.getResultList().get(0));
 	}
 	
 	public Profile retriveProfileById(Long profileId) {

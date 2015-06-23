@@ -32,7 +32,6 @@ public class Wine implements Serializable {
 	@JsonBackReference
 	private Collection<Grape> grapes;
 	private Set<Synonym> synonyms;
-	@JsonBackReference
 	private User user;
 	
 	public Wine() {}
