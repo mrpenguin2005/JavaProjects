@@ -51,4 +51,11 @@ public class WineBS {
 		
 		return winesDTO;
 	}
+	
+//	List fruitList = s.createQuery(
+//			  "select f.shape as shape, f.name as name from Fruit f where f.shape = :shape;")
+//			  .setParameter("shape", paramShape)
+//			  .setResultTransformer( Transformers.aliasToBean(FruitSearchTO.class))
+//			  .list();
+//			FruitSearchTOdto = (FruitSearchTO) fruitList .get(0);
 }
