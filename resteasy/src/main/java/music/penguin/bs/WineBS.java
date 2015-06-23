@@ -3,14 +3,14 @@ package music.penguin.bs;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import music.penguin.dao.WineDAO;
 import music.penguin.domain.Wine;
 import music.penguin.dto.WineDTO;
 
-@Stateful
+@Stateless
 public class WineBS {
 	@Inject WineDAO wineDAO;
 	@Inject ORMUtils ormUtils;
