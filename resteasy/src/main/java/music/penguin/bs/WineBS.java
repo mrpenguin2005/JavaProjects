@@ -43,7 +43,7 @@ public class WineBS {
 	}
 	
 	public List<WineDTO> retrieveWineDTOList(Long userId) {
-		List<WineDTO> winesDTO = new ArrayList<WineDTO>();		
+		List<WineDTO> winesDTO = new ArrayList<WineDTO>();
 		List<Wine> wines = wineDAO.retrieveWineList(userId);
 		for (Wine wine : wines) {
 			winesDTO.add(new WineDTO(wine));

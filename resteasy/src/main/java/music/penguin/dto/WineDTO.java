@@ -1,7 +1,10 @@
 package music.penguin.dto;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import music.penguin.domain.Grape;
@@ -25,7 +28,7 @@ public class WineDTO {
 		this.vintage = wine.getVintage();
 		this.country = wine.getCountry();
 		this.grapes = null;
-		this.synonyms = wine.getSynonyms();
+		this.synonyms = null;
 		this.user = new UserDTO(wine.getUser());
 	}
 	
@@ -34,6 +37,40 @@ public class WineDTO {
 		for (Grape grape : grapes) {
 			GrapeDTO g = new GrapeDTO(grape);
 			dtoList.add(g);
+		}
+		return dtoList;
+	}
+	
+	public static<D,T> Collection<D> createDTOList1(Class<D> clazz, Collection<T> attributes) {
+		Collection<D> dtoList = new ArrayList<D>();
+		for (T attribute : attributes) {
+			D g;
+			try {
+				g = clazz.newInstance();
+				Method m = g.getClass().getMethod("setGrapeDTO", attribute.getClass());
+				m.invoke(m, attribute);
+				dtoList.add(g);
+			} catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return dtoList;
+	}
+	
+	public static<D,T> Set<D> createDTOSet(Class<D> clazz, Collection<T> attributes) {
+		Set<D> dtoList = new HashSet<D>();
+		for (T attribute : attributes) {
+			D g;
+			try {
+				g = clazz.newInstance();
+				Method m = g.getClass().getMethod("setGrapeDTO", attribute.getClass());
+				m.invoke(m, attribute);
+				dtoList.add(g);
+			} catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return dtoList;
 	}

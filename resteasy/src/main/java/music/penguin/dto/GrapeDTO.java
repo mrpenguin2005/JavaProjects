@@ -26,7 +26,9 @@ public class GrapeDTO {
 		Collection<WineDTO> dtoList = new ArrayList<WineDTO>();
 		for (Wine wine : wines) {
 			WineDTO w = new WineDTO(wine);
-			w.getSynonyms().size();
+			if (w.getSynonyms() != null) {
+				w.getSynonyms().size();
+			}
 			dtoList.add(w);
 		}
 		return dtoList;
