@@ -1,13 +1,13 @@
 package music.penguin.bs;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import music.penguin.dao.UserDAO;
 import music.penguin.domain.User;
 import music.penguin.dto.UserDTO;
 
-@Stateful
+@Stateless
 public class UserBS {
 	@Inject UserDAO userDAO;
 

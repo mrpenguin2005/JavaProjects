@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,7 +13,7 @@ import music.penguin.dao.GrapeDAO;
 import music.penguin.domain.Grape;
 import music.penguin.dto.GrapeDTO;
 
-@Stateful
+@Stateless
 public class GrapeBS implements Serializable {
 
 	private static final long serialVersionUID = 3203700955812348506L;
