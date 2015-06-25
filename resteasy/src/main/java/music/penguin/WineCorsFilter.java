@@ -13,7 +13,7 @@ public class WineCorsFilter extends CorsFilter {
 		super();
 		setAllowedHeaders("Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 		setAllowedMethods("POST, GET, HEAD, PUT, DELETE, OPTIONS");
-		//getAllowedOrigins().add("*");
+		getAllowedOrigins().add("*");
 	}
 
 }
