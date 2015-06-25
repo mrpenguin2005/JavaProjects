@@ -3,12 +3,14 @@ package music.penguin.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import music.penguin.domain.Grape;
 
+@Stateless
 public class GrapeDAO implements Serializable {
 	
 	private static final long serialVersionUID = -3648735723580403769L;

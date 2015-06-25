@@ -3,10 +3,12 @@ package music.penguin.bs;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnitUtil;
 
+@Stateless
 public class ORMUtils implements Serializable {
 
 	private static final long serialVersionUID = -3414490048495414958L;
