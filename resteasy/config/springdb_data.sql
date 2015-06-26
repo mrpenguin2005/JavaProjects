@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.19, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
 --
--- Host: gibson    Database: springdb
+-- Host: localhost    Database: springdb
 -- ------------------------------------------------------
--- Server version	5.0.45
+-- Server version	5.5.43-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,10 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Not dumping tablespaces as no INFORMATION_SCHEMA.FILES table on this server
---
 
 --
 -- Dumping data for table `tb_grape`
@@ -35,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `tb_profile` WRITE;
 /*!40000 ALTER TABLE `tb_profile` DISABLE KEYS */;
-INSERT INTO `tb_profile` VALUES (1,'Admin');
+INSERT INTO `tb_profile` VALUES (1,'Admin'),(2,'User');
 /*!40000 ALTER TABLE `tb_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,6 +43,15 @@ LOCK TABLES `tb_synonym` WRITE;
 /*!40000 ALTER TABLE `tb_synonym` DISABLE KEYS */;
 INSERT INTO `tb_synonym` VALUES (3,'Aragonez',5),(4,'Tinta Roriz',5),(5,'Pinot Nero',3);
 /*!40000 ALTER TABLE `tb_synonym` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `tb_teste`
+--
+
+LOCK TABLES `tb_teste` WRITE;
+/*!40000 ALTER TABLE `tb_teste` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_teste` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -65,7 +70,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `tb_wine` WRITE;
 /*!40000 ALTER TABLE `tb_wine` DISABLE KEYS */;
-INSERT INTO `tb_wine` VALUES (1,'La Planta',2011,'Spain',2),(3,'Pago Florentino',2011,'Spain',3),(8,'Rupestro',2010,'Italy',2),(9,'Marques de Montemor',2010,'Portugal',2),(58,'MyWine',2012,'Zvezda',2),(59,'MyWine 2',2011,'Portugal',2),(60,'teste',1111,'rrrr',3),(61,'Sol e Vento',2011,'',3);
+INSERT INTO `tb_wine` VALUES (1,'La Planta',2011,'Spain',2),(3,'Pago Florentino',2011,'Spain',3),(8,'Rupestro',2010,'Italy',2),(9,'Marques de Montemor',2010,'Portugal',2),(58,'MyWine',2012,'Zvezda',2),(59,'MyWine 2',2011,'Portugal',2),(60,'teste',1111,'rrrr',3),(61,'Sol e Vento',2011,'Italy',3);
 /*!40000 ALTER TABLE `tb_wine` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-08 21:07:44
+-- Dump completed on 2015-06-26 13:36:45
