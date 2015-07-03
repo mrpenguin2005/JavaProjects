@@ -9,7 +9,7 @@
 		<h1>User um factory</h1>
 		<table>
 			<tr ng-repeat="w in wines">
-				<td>{{ w.name  }}</td>
+				<td>{{ w.name }}</td>
 				<td>{{ w.country }}</td>
 				<td>{{ w.vintage }}</td>
 			</tr>
@@ -18,12 +18,12 @@
 	</div>
 
 	<script>
-var app = angular.module('myApp', []);
-app.controller('customersCtrl', function($scope, $http) {
-  $http.get("http://localhost:8080/resteasy/ooo/data/wine/user")
-  .success(function (response) {$scope.wines = response;});
-});
-</script>
+		var app = angular.module('myApp', []);
+		app.controller('customersCtrl', function($scope, $http) {
+			$http.get("http://localhost:8080/resteasy/ooo/data/wine/user")
+			.success(function (response) {$scope.wines = response;});
+		});
+	</script>
 
 </body>
 </html>
