@@ -9,13 +9,14 @@
 <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
 <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
 <link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-	<div ng-app="myApp" ng-controller="wineController">
+	<div ng-app="myApp" ng-controller="wineController" class="container">
 
-		<h1>User factory5</h1>
-		<table>
+		<h1>User factory 20150703-01</h1>
+		<table class="table table-striped table-bordered table-condensed">
 			<tr ng-repeat="w in wines">
 				<td>{{ w.name }}</td>
 				<td>{{ w.country }}</td>
