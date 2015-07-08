@@ -2,7 +2,15 @@ var wineServices = angular.module('wineServices', [ 'ngResource' ]);
 
 wineServices.factory('Wine', ['$resource',
     function($resource) {
-		return $resource('http://localhost:8080/resteasy/ooo/data/wine/user', {}, {
-			query: {method:'GET', params:{}, isArray:true}
-		});
+	    var f = {};
+	    f.obter = function() {
+			return $resource('http://localhost:8080/resteasy/ooo/data/wine/user', {}, {
+				get: {method:'GET', params:{}, isArray:true}
+			});
+	    }
+	    
+	    f.teste = function(str) {
+	    	window.alert(str);
+	    }
+	    return f;
 }]);

@@ -2,7 +2,10 @@ var app = angular.module('myApp', ['wineServices']);
 //var app = angular.module('myApp', []);
 
 app.controller('wineController',['$scope','Wine', function($scope, Wine){
-	$scope.wines = Wine.query();
+	Wine.obter().get({}, function(result) {
+		$scope.wines = result;
+	});
+	Wine.teste('String');
 }]);
 
 //app.controller('customersCtrl', function($scope, $http) {
