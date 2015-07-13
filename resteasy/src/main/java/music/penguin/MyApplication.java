@@ -4,7 +4,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 
-@ApplicationPath("/ooo")
+@ApplicationPath("/wine")
 public class MyApplication extends Application {
 
 }

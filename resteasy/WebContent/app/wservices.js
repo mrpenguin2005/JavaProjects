@@ -4,7 +4,7 @@ wineServices.factory('Wine', ['$resource',
     function($resource) {
 	    var f = {};
 	    f.obter = function() {
-			return $resource('http://localhost:8080/resteasy/ooo/data/wine/user', {}, {
+			return $resource('http://localhost:8080/resteasy/wine/data/wine/user', {}, {
 				get: {method:'GET', params:{}, isArray:true}
 			});
 	    }
