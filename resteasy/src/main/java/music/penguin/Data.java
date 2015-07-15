@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import music.penguin.bs.GrapeBS;
@@ -16,7 +17,7 @@ import music.penguin.domain.User;
 import music.penguin.dto.GrapeDTO;
 import music.penguin.dto.WineDTO;
 
-@Path("/data")
+@Path("/services")
 public class Data {
 	@Inject ORMUtils ormUtils; 
 	@Inject GrapeBS grapeBS;
@@ -53,10 +54,10 @@ public class Data {
 	}
 	
 	@GET
-	@Path("/wine/user")
+	@Path("/wine/user/{userId}")
 	@Produces("application/json;charset=utf-8")
-	public List<WineDTO> getWineUser() {
-		List<WineDTO> wine = wineBS.retrieveWineDTOList(2L);
+	public List<WineDTO> getWineUser(@PathParam("userId") Long id) {
+		List<WineDTO> wine = wineBS.retrieveWineDTOList(id);
 		return wine;
 	}
 	
