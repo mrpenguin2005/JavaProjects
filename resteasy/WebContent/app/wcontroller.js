@@ -16,7 +16,7 @@ app.controller('wineController',['$scope','Wine', function($scope, Wine) {
 	}
 }]);
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 	//
 	// For any unmatched url, redirect to /state1
 	//$urlRouterProvider.otherwise("/state1");
@@ -27,4 +27,4 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "wsearch.html",
       controller: 'wineController'
     });
-});
+}]);
