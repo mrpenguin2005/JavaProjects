@@ -13,18 +13,30 @@
 <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-	<h1>Titulo</h1>
-	<ul>
-		<li><a ui-sref="search">Search</a></li>
-	</ul>
-	<div ui-view></div>
+	<div ng-app="myApp" ng-controller="wineController" class="container">
+
+		<h1>Edit Wine</h1>
+		<table class="table table-striped table-bordered table-condensed">
+			<tr>
+				<td>Name</td>
+				<td>Country</td>
+				<td>Vintage</td>
+			</tr>
+			<tr>
+				<td>{{ item.name }}</td>
+				<td>{{ item.country }}</td>
+				<td>{{ item.vintage }}</td>
+			</tr>
+		</table>
+		<hr>
+
+	</div>
 	
 	<script src="bower_components/angular/angular.js"></script>
   	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.js"></script>
-	<script src="app.js"></script>
 	<script src="wservices.js"></script>
 	<script src="wcontroller.js"></script>
-	<script src="editController.js"></script>
+
 </body>
 </html>

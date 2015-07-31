@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['wineServices','ui.router']);
+var app = angular.module('myApp');
 
 app.controller('wineController',['$scope','Wine', function($scope, Wine) {
 	function winesUser() {
@@ -16,15 +16,3 @@ app.controller('wineController',['$scope','Wine', function($scope, Wine) {
 	}
 }]);
 
-app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-	//
-	// For any unmatched url, redirect to /state1
-	//$urlRouterProvider.otherwise("/state1");
-	
-	$stateProvider
-    .state('search', {
-      url: "/search",
-      templateUrl: "wsearch.html",
-      controller: 'wineController'
-    });
-}]);

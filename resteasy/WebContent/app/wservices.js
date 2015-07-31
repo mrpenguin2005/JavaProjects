@@ -8,9 +8,5 @@ wineServices.factory('Wine', ['$resource',
 				get: {method:'GET', params:{}, isArray:true}
 			});
 	    }
-	    
-//	    f.teste = function(str) {
-//	    	window.alert(str);
-//	    }
 	    return f;
 }]);

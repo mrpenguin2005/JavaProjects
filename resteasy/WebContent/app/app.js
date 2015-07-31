@@ -2,11 +2,35 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  'ui.router',
+  'wineServices'
+])
+.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+	//
+	// For any unmatched url, redirect to /state1
+	//$urlRouterProvider.otherwise("/state1");
+	
+	$stateProvider
+    .state('search', {
+      url: "/search",
+      templateUrl: "wsearch.html",
+      controller: 'wineController'
+    })
+    .state('edit', {
+      url: "/edit",
+      templateUrl: "wedit.html",
+      controller: 'editController',
+      params: {item: null}
+    });
 }]);
+
+
+//Estado:
+//	params : { nomeDoObjeto: null },
+//	
+//
+//na chamada (link):
+//	<a ui-sref="nomeDoEstado({ nomeDoObjeto: objetoNoControllerOrigem })">link</a>
+//
+//no coltroller destino:
+//	$stateParams.nomeDoObjeto
