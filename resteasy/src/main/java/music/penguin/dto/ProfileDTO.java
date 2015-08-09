@@ -4,13 +4,13 @@ import music.penguin.domain.Profile;
 
 public class ProfileDTO {
 	private Long id;
-	private String desc;
+	private String name;
 	
 	public ProfileDTO() {}
 	
 	public ProfileDTO(Profile profile) {
 		this.id = profile.getId();
-		this.desc = profile.getName();
+		this.name = profile.getName();
 	}
 	
 	public Long getId() {
@@ -21,12 +21,12 @@ public class ProfileDTO {
 		this.id = id;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getName() {
+		return name;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
