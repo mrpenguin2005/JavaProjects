@@ -8,9 +8,7 @@ app.controller('editController',['$scope', '$stateParams', 'Wine', function($sco
 	$scope.submit = function(item) {
 		console.log('Submit id   :'+item.id);
 		console.log('Submit name :'+item.name);
-		Wine.salvar(item).save({}, function(result) {
-			console.log(result);
-		});
+		Wine.salvar(item);
 	}
 }]);
 

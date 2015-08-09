@@ -18,6 +18,9 @@ import music.penguin.bs.WineBS;
 import music.penguin.domain.User;
 import music.penguin.dto.GrapeDTO;
 import music.penguin.dto.WineDTO;
+import music.penguin.dto.WineForm;
+
+import org.jboss.resteasy.annotations.Form;
 
 @Path("/services")
 public class Data {
@@ -56,10 +59,11 @@ public class Data {
 	}
 	
 	@POST
-	@Path("/wine/{id}")
-	@Consumes("application/json;charset=utf-8")
-	public void saveWine(@PathParam("id") Long id) {
-		System.err.println("saveWine.id :"+id);
+	@Path("/wine")
+	//@Consumes("application/json")
+	public void saveWine(@Form WineForm wine) {
+		System.err.println("saveWine.id   :"+wine.getId());
+		System.err.println("saveWine.name :"+wine.getName());
 	}
 	
 	@GET

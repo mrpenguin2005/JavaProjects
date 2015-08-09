@@ -1,7 +1,7 @@
 var wineServices = angular.module('wineServices', [ 'ngResource' ]);
 
-wineServices.factory('Wine', ['$resource',
-    function($resource) {
+wineServices.factory('Wine', ['$resource','$http',
+    function($resource,$http) {
 	    var f = {};
 	    f.obter = function(id) {
 			return $resource('http://localhost:8080/resteasy/wine/services/wine/user/:userId', {userId:id}, {
@@ -9,9 +9,7 @@ wineServices.factory('Wine', ['$resource',
 			});
 	    }
 	    f.salvar = function(item) {
-			return $resource('http://localhost:8080/resteasy/wine/services/wine/:id', {id:item.id}, {
-				save: {method:'POST', params:{wine:item}, isArray:false}
-			});
+			$http.post('http://localhost:8080/resteasy/wine/services/wine',item);
 	    }
 	    return f;
 }]);
